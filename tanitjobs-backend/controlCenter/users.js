@@ -10,7 +10,7 @@ function generateCode() {
 }
 
 exports.emailVerification = async (req, res) => {
-  const { name, email, phone, password } = req.body;
+  const { email, password } = req.body;
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -27,10 +27,8 @@ exports.emailVerification = async (req, res) => {
       console.log(code);
       const newCode = new codes({
         code,
-        name,
         email,
         password,
-        phone,
       });
       console.log(newCode);
       const mailOptions = {
@@ -56,7 +54,7 @@ exports.emailVerification = async (req, res) => {
 };
 
 exports.signUp = async (req, res) => {
-  const code = req.body;
+            
   console.log(code);
   try {
     const codeFound = await codes.findOne(code);

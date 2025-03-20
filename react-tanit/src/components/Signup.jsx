@@ -1,7 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Signup = () => {
+  const [user, setUser] = useState({ email: "", password: "" });
+  const [confirm, setConfirm] = useState("");
+  const navigate = useNavigate();
+  console.log(user);
+  console.log(confirm);
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      if (user.password !== confirm) {
+        toast.error("ur password is not the same ");
+      } else {
+        const response = await axios.post(
+          "http://localhost:5001/user/emailVerif",
+          user
+        );
+
+        if (response.status === 200) {
+          navigate("/code");
+          toast.success("mail verif sent ");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -30,6 +60,8 @@ export const Signup = () => {
                   Your email
                 </label>
                 <input
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                  // onChange={(e) => setUser({ ...user, email: e.target.value })}
                   type="email"
                   name="email"
                   id="email"
@@ -46,6 +78,9 @@ export const Signup = () => {
                   Password
                 </label>
                 <input
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
                   type="password"
                   name="password"
                   id="password"
@@ -62,6 +97,7 @@ export const Signup = () => {
                   Confirm password
                 </label>
                 <input
+                  onChange={(e) => setConfirm(e.target.value)}
                   type="confirm-password"
                   name="confirm-password"
                   id="confirm-password"
@@ -95,14 +131,17 @@ export const Signup = () => {
                   </label>
                 </div>
               </div>
+
               <button
+                onClick={handleClick}
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Create an account
               </button>
+
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
+                Already have an account
                 <Link
                   to={"/login"}
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"

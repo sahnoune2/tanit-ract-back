@@ -14,9 +14,11 @@ const {
   addJob,
 } = require("../controlCenter/company");
 const { isAuth } = require("../auth/isAuth");
+const { getJobs } = require("../controlCenter/jobs");
 
 const userRouter = express.Router();
 const companyRouter = express.Router();
+const jobsRouter = express.Router();
 
 //user router
 userRouter.post("/signUp", signUp);
@@ -32,4 +34,8 @@ companyRouter.post("/signIn", signInCompany);
 companyRouter.post("/emailVerif", emailVerificationCompany);
 companyRouter.post("/addJob", addJob);
 
-module.exports = { userRouter, companyRouter };
+//jobs router
+
+jobsRouter.get("/getJobs", getJobs);
+
+module.exports = { userRouter, companyRouter, jobsRouter };
