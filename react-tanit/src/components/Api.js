@@ -14,3 +14,17 @@ export const getJobs = async () => {
     return null;
   }
 };
+export const getCurrent = async () => {
+  try {
+    const response = await axios.get("http://localhost:5001/user/getcurrent", {
+      withCredentials: true,
+    });
+    console.log(response);
+    if (response.status === 200) {
+      return response.data.user;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

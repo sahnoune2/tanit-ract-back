@@ -54,7 +54,8 @@ exports.emailVerification = async (req, res) => {
 };
 
 exports.signUp = async (req, res) => {
-            
+  const { code } = req.body;
+
   console.log(code);
   try {
     const codeFound = await codes.findOne(code);
@@ -84,6 +85,7 @@ exports.signIn = async (req, res) => {
   const { email, password } = req.body;
   try {
     const userFound = await users.findOne({ email });
+    console.log(userFound);
 
     if (!userFound) {
       res.status(400).send({ msg: "user does not exist" });
@@ -93,10 +95,14 @@ exports.signIn = async (req, res) => {
         res.status(400).send({ msg: "password is incorrect" });
       } else {
         const token = jwt.sign(
-          { name: userFound.name, email: userFound.email },
+          { id: userFound._id, email: userFound.email },
           "abc123",
           { expiresIn: "7d" }
         );
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
         res
           .status(200)
           .send({ msg: "login completed", user: userFound, token: token });
@@ -190,4 +196,20 @@ exports.deleteOneJobFromUser = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+exports.getCurrent = (req, res) => {
+  const user = req.user;
+  if (user) {
+    res.status(200).send({ msg: "u r logged in bro ", user });
+  } else {
+    res
+      .status(500)
+      .send({ msg: "error while trying to authentificate u ", error: error });
+  }
+};
+
+exports.logOut = (req, res) => {
+  res.clearCookie("token", { httpOnly: true, secure: true });
+  res.status(200).send({ msg: "cookies deleted successfully " });
 };

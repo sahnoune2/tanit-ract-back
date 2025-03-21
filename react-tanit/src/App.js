@@ -8,7 +8,7 @@ import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { Contact } from "./components/Contact";
 import Offers from "./components/Offers";
-import { getJobs } from "./components/Api";
+import { getCurrent, getJobs } from "./components/Api";
 import { ToastContainer } from "react-toastify";
 import Code from "./components/Code";
 
@@ -24,6 +24,7 @@ function App() {
           <ToastContainer position="top-right" />
         </>
       ),
+      loader: getCurrent,
       children: [
         { path: "/", element: <Carousele /> },
         { path: "/login", element: <Login /> },

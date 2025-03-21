@@ -1,7 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useRevalidator } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const Login = () => {
+  const [user, setuser] = useState({ email: "", password: "" });
+  console.log(user);
+  const { revalidate } = useRevalidator();
+
+  const handleclick = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5001/user/signIn",
+        user,
+        { withCredentials: true }
+      );
+      if (response.status === 200) {
+        console.log(response);
+        toast.success(response.data.msg);
+        revalidate()
+      }
+    } catch (error) {
+      toast.error(error.response.data.msg);
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -30,6 +54,7 @@ export const Login = () => {
                   Your email
                 </label>
                 <input
+                  onChange={(e) => setuser({ ...user, email: e.target.value })}
                   type="email"
                   name="email"
                   id="email"
@@ -46,6 +71,9 @@ export const Login = () => {
                   Password
                 </label>
                 <input
+                  onChange={(e) =>
+                    setuser({ ...user, password: e.target.value })
+                  }
                   type="password"
                   name="password"
                   id="password"
@@ -82,6 +110,7 @@ export const Login = () => {
                 </a>
               </div>
               <button
+                onClick={handleclick}
                 type="submit"
                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >

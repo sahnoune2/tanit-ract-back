@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const { object } = require("webidl-conversions");
 
 const userSchema = new mongoose.Schema({
-  name: { type: String, required: true },
+  name: { type: String },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  phone: { type: Number, required: true },
+  phone: { type: Number },
   skills: [{ type: String }],
   experience: [
     {

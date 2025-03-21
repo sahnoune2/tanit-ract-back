@@ -6,6 +6,8 @@ const {
   applyJob,
   deleteAllJobUser,
   deleteOneJobFromUser,
+  getCurrent,
+  logOut,
 } = require("../controlCenter/users");
 const {
   signUpCompany,
@@ -24,9 +26,11 @@ const jobsRouter = express.Router();
 userRouter.post("/signUp", signUp);
 userRouter.post("/emailVerif", emailVerification);
 userRouter.post("/signIn", signIn);
+userRouter.get("/getcurrent", isAuth, getCurrent);
 userRouter.post("/applyJob", isAuth, applyJob);
 userRouter.delete("/deleteAllJobs", isAuth, deleteAllJobUser);
 userRouter.delete("/deleteOneJob", isAuth, deleteOneJobFromUser);
+userRouter.delete("/deletecookies", logOut);
 
 //company router
 companyRouter.post("/signUp", signUpCompany);

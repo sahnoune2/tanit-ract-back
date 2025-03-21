@@ -3,10 +3,11 @@ const jwt = require("jsonwebtoken");
 const users = require("../schema/userSchema");
 
 exports.isAuth = async (req, res, next) => {
-  const token = req.header("token");
+  const token = req.cookies.token;
   try {
     const verify = jwt.verify(token, "abc123");
-    const user = await users.findOne({email:verify.email});
+
+    const user = await users.findOne({ email: verify.email });
     if (!user) {
       res.status(400).send({ msg: "u r not authorized to do this action" });
     } else {
@@ -14,11 +15,9 @@ exports.isAuth = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        msg: "error while trying to authentificate u ",
-        error: error.message,
-      });
+    res.status(500).send({
+      msg: "error while trying to authentificate u ",
+      error: error.message,
+    });
   }
 };
