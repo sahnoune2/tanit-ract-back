@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tanit-ract-back/static/css/main.1c64166f.css",
+    "main.js": "/tanit-ract-back/static/js/main.d861ea9c.js",
+    "index.html": "/tanit-ract-back/index.html",
+    "main.1c64166f.css.map": "/tanit-ract-back/static/css/main.1c64166f.css.map",
+    "main.d861ea9c.js.map": "/tanit-ract-back/static/js/main.d861ea9c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c64166f.css",
+    "static/js/main.d861ea9c.js"
+  ]
+}
