@@ -1,11 +1,7 @@
 const express = require("express");
 const { config } = require("./config/config");
 const { userRouter, companyRouter, jobsRouter } = require("./router/router");
-<<<<<<< HEAD
 
-=======
-const port = 10000;
->>>>>>> b7117ccbf1ddee22e0ad35138cb1245783013f34
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
