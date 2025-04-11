@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const port = process.env.PORT || 5001; // Use Render's PORT or fallback to 5001
+const port = process.env.PORT ; // Use Render's PORT or fallback to 5001
 
 const app = express();
 
@@ -22,5 +22,5 @@ app.use("/company", companyRouter);
 app.use("/jobs", jobsRouter);
 app.get("/", (req, res) => res.send("hello"));
 app.listen(port, () => {
-  console.log("server is running");
+  console.log("server is running at",port);
 });
