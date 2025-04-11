@@ -16,10 +16,11 @@ config();
 app.use(cookieParser());
 
 app.use(cors({ credentials: true }));
-//origin: "http://localhost:3000", 
+//origin: "http://localhost:3000",
 app.use("/user", userRouter);
 app.use("/company", companyRouter);
 app.use("/jobs", jobsRouter);
+app.get("/", (req, res) => res.send("hello"));
 app.listen(port, () => {
   console.log("server is running");
 });
