@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5001; // Use Render's PORT or fallback to 5001
 
 const app = express();
 
@@ -15,7 +15,8 @@ app.use(express.json());
 config();
 app.use(cookieParser());
 
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(cors({ credentials: true }));
+//origin: "http://localhost:3000", 
 app.use("/user", userRouter);
 app.use("/company", companyRouter);
 app.use("/jobs", jobsRouter);
