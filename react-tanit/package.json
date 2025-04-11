@@ -2,12 +2,14 @@
   "name": "react-tanit",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://sahnoune2.github.io/tanit-ract-back",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.3",
+    "gh-pages": "^6.3.0",
     "pure-react-carousel": "^1.32.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -21,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "preDeploy": "npm run build",
+    "deply": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

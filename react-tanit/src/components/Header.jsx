@@ -11,7 +11,7 @@ export const Header = () => {
   const logout = async () => {
     try {
       const response = await axios.delete(
-        "http://localhost:5001/user/deletecookies",
+        "https://tanit-ract-back.onrender.com/user/deletecookies",
         { withCredentials: true }
       );
       if (response.status === 200) {

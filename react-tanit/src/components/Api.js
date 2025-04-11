@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = "http://localhost:5001";
+const api = "https://tanit-ract-back.onrender.com";
 
 export const getJobs = async () => {
   try {
@@ -16,9 +16,12 @@ export const getJobs = async () => {
 };
 export const getCurrent = async () => {
   try {
-    const response = await axios.get("http://localhost:5001/user/getcurrent", {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      "https://tanit-ract-back.onrender.com/user/getcurrent",
+      {
+        withCredentials: true,
+      }
+    );
     console.log(response);
     if (response.status === 200) {
       return response.data.user;

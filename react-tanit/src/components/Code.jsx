@@ -8,9 +8,13 @@ export default function Code() {
 
   const handleclick = async () => {
     try {
-      const response = await axios.post("http://localhost:5001/user/signUp", code, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        "https://tanit-ract-back.onrender.com/user/signUp",
+        code,
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200) {
         toast.success("code sent successfully");

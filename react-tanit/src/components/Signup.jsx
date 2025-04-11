@@ -17,7 +17,7 @@ export const Signup = () => {
         toast.error("ur password is not the same ");
       } else {
         const response = await axios.post(
-          "http://localhost:5001/user/emailVerif",
+          "https://tanit-ract-back.onrender.com/user/emailVerif",
           user
         );
 
