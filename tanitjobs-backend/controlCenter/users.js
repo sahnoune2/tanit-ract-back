@@ -4,6 +4,9 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const codes = require("../schema/codes");
 const jobs = require("../schema/jobSchema");
+const dotenv = require("dotenv");
+dotenv.config();
+const secret = process.env.JWT_SECRET;
 
 function generateCode() {
   return Math.random().toString(36).substring(2, 8);
@@ -96,7 +99,7 @@ exports.signIn = async (req, res) => {
       } else {
         const token = jwt.sign(
           { id: userFound._id, email: userFound.email },
-          "abc123",
+          secret,
           { expiresIn: "7d" }
         );
         res.cookie("token", token, {

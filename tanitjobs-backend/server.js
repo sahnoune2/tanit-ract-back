@@ -1,9 +1,13 @@
 const express = require("express");
 const { config } = require("./config/config");
 const { userRouter, companyRouter, jobsRouter } = require("./router/router");
-const port = 5001;
+
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const port = process.env.PORT || 5000;
 
 const app = express();
 

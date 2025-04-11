@@ -5,6 +5,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 const codes = require("../schema/codes");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const secret = process.env.JWT_SECRET;
 
 function generateCode() {
   return Math.random().toString(36).substring(2, 8);
@@ -97,7 +101,7 @@ exports.signInCompany = async (req, res) => {
       } else {
         const token = jwt.sign(
           { name: userFound.name, email: userFound.email },
-          "abc123",
+          secret,
           { expiresIn: "7d" }
         );
         res

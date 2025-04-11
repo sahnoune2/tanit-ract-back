@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const users = require("../schema/userSchema");
+const secret = process.env.JWT_SECRET;
 
 exports.isAuth = async (req, res, next) => {
   const token = req.cookies.token;
   try {
-    const verify = jwt.verify(token, "abc123");
+    const verify = jwt.verify(token, secret);
 
     const user = await users.findOne({ email: verify.email });
     if (!user) {
